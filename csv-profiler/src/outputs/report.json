@@ -1,0 +1,92 @@
+{
+    "rows": 5,
+    "columns": {
+        "name": {
+            "name": "name",
+            "type": "String",
+            "total": 5,
+            "missing": 1,
+            "non_missing": 4,
+            "missing_pct": 20.0,
+            "non_missing_pct": 80.0,
+            "unique": 4,
+            "notes": [],
+            "count": 4,
+            "top": [
+                {
+                    "value": "Aisha",
+                    "count": 1
+                },
+                {
+                    "value": "Fahad",
+                    "count": 1
+                },
+                {
+                    "value": "Noor",
+                    "count": 1
+                },
+                {
+                    "value": "Salem",
+                    "count": 1
+                }
+            ]
+        },
+        "age": {
+            "name": "age",
+            "type": "Integer",
+            "total": 5,
+            "missing": 2,
+            "non_missing": 3,
+            "missing_pct": 40.0,
+            "non_missing_pct": 60.0,
+            "unique": 3,
+            "notes": [],
+            "count": 3,
+            "min": 23.0,
+            "max": 31.0,
+            "mean": 27.666666666666668
+        },
+        "city": {
+            "name": "city",
+            "type": "String",
+            "total": 5,
+            "missing": 2,
+            "non_missing": 3,
+            "missing_pct": 40.0,
+            "non_missing_pct": 60.0,
+            "unique": 3,
+            "notes": [],
+            "count": 3,
+            "top": [
+                {
+                    "value": "Riyadh",
+                    "count": 1
+                },
+                {
+                    "value": "Jeddah",
+                    "count": 1
+                },
+                {
+                    "value": "Dammam",
+                    "count": 1
+                }
+            ]
+        },
+        "salary": {
+            "name": "salary",
+            "type": "Integer",
+            "total": 5,
+            "missing": 2,
+            "non_missing": 3,
+            "missing_pct": 40.0,
+            "non_missing_pct": 60.0,
+            "unique": 3,
+            "notes": [],
+            "count": 3,
+            "min": 9000.0,
+            "max": 15000.0,
+            "mean": 12000.0
+        }
+    },
+    "notes": []
+}
