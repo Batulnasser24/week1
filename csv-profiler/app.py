@@ -7,7 +7,7 @@ from io import StringIO
 from pathlib import Path
 
 # 1. إضافة المسار لضمان رؤية المجلد المصدري
-sys.path.insert(0, str(Path(__file__).resolve().parent / "src"))
+sys.path.insert(0, str(Path(file).resolve().parent / "src"))
 
 from csv_profiler.profile import basic_profile
 from csv_profiler.render import render_markdown
@@ -15,7 +15,7 @@ from csv_profiler.render import render_markdown
 st.set_page_config(page_title="CSV Profiler Pro", layout="wide")
 st.title("📊 CSV Profiler & Analyzer")
 
-# --- قسم جلب البيانات (المكان الذي وضعنا فيه كودك) ---
+# --- قسم جلب البيانات ---
 st.sidebar.header("Data Source")
 use_url = st.sidebar.checkbox("Load from URL", value=False)
 
@@ -42,39 +42,37 @@ else:
 
 # --- قسم معالجة وعرض البيانات ---
 if rows:
-    # 1. عرض معاينة للبيانات (Review Data)
-    st.subheader("📋 Data Preview")
-    st.dataframe(rows[:10])  # يعرض أول 10 أسطر بشكل تفاعلي
+ st.subheader("📋 Data Preview")
+ st.dataframe(rows[:10]) 
     
-    if st.button("🚀 Generate Full Profile"):
-        # 2. توليد التقرير
-        report_obj = basic_profile(rows)
+    # إدارة حالة التقرير ليبقى ظاهراً بعد التحميل
+if 'show_report' not in st.session_state:
+        st.session_state.show_report = False
+
+if st.button("🚀 Generate Full Profile"):
+        st.session_state.show_report = True
+
+if st.session_state.show_report:
+     report_obj = basic_profile(rows)
+     report_dict = report_obj.to_dict()
+     md_report = render_markdown(report_obj)
         
-        # تحويل التقرير لقاموس لاستخدامه في JSON
-        report_dict = report_obj.to_dict()
+     st.divider()
+     st.subheader("📝 Analysis Report")
+     st.markdown(md_report)
         
-        # توليد نص المارك داون
-        md_report = render_markdown(report_obj)
+     st.subheader("📥 Export Report")
+     col1, col2 = st.columns(2)
         
-        st.divider()
-        
-        # 3. عرض التقرير (Markdown Preview)
-        st.subheader("📝 Analysis Report")
-        st.markdown(md_report)
-        
-        # 4. قسم التصدير (Export Options)
-        st.subheader("📥 Export Report")
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            st.download_button(
+     with col1:
+         st.download_button(
                 label="Download JSON",
                 data=json.dumps(report_dict, indent=4),
                 file_name="report.json",
                 mime="application/json"
             )
             
-        with col2:
+     with col2:
             st.download_button(
                 label="Download Markdown",
                 data=md_report,
