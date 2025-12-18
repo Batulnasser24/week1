@@ -7,7 +7,7 @@ from io import StringIO
 from pathlib import Path
 
 # 1. إضافة المسار لضمان رؤية المجلد المصدري
-sys.path.insert(0, str(Path(file).resolve().parent / "src"))
+sys.path.insert(0, str(Path(__file__).resolve().parent / "src"))
 
 from csv_profiler.profile import basic_profile
 from csv_profiler.render import render_markdown
